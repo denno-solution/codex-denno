@@ -7,6 +7,8 @@
 - モデルに渡すときのトランケーション閾値を拡張しています。
   - バイト数上限: **約 10KiB → 100KiB**
   - 行数上限: **256 行 → 2000 行**
+- この拡張は **codex 系モデル（`gpt-5-codex` / `gpt-5.1-codex` など）を使っている場合のみ有効**です。
+  - Codex CLI では `/model` コマンドでモデルを `gpt-5-codex` や `gpt-5.1-codex` に変更してください。
 - 画面に出る CLI の生の出力は従来どおりフルですが、モデルに返すサマリ文字列が大きく取れるようになっています。
 - 公式版 `codex` はそのまま残しつつ、拡張版を `codex-denno` という別コマンドとしてインストールします。
 
@@ -53,6 +55,8 @@ codex-denno --help
   - 例: `codex`（npm でインストールしたもの）が従来の 10KiB / 256 行。
 - 拡張版 CLI:
   - `codex-denno` が 100KiB / 2000 行。
+- 現時点では、VS Code などの **IDE 拡張機能からは `codex-denno` を直接利用できません**。
+  - ターミナルから `codex-denno` を起動するか、後述の SDK 連携を通じて利用する想定です。
 
 用途に応じてコマンド名を切り替えるだけで共存できます。
 
@@ -91,4 +95,3 @@ const codex = new Codex({
 3. 出来上がった `target\x86_64-pc-windows-msvc\release\codex.exe` を任意のディレクトリにコピーし、`codex-denno.exe` として PATH に通す。
 
 ただし、実運用では **WSL 上で `codex-denno` を使う構成を推奨**します（挙動が Linux/macOS と揃うため）。***
-
